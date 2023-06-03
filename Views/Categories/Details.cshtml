@@ -1,0 +1,36 @@
+﻿@model BlogApp.Models.CategoryPostViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    var postCount = @Model.PostData.Count;
+}
+
+<partial name="_PostNavbar" for="@ViewData["CategoriesData"]"/>
+
+<h1 class="category-name">Category: @Model.SelectedCategory.Name</h1>
+
+<div class="post-container rounded overflow-hidden">
+    @if (@postCount > 0)
+    {
+        @foreach (var item in Model.PostData)
+        {
+        <div class="post-item">
+            <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                <img src="~/imgs/@item.ImgUrl"/>
+            </a>
+
+            <a asp-controller="Categories" asp-action="Details" asp-route-id="@item.CategoryID" class="button-64"><span class="text">@item.Category.Name</span></a>
+            
+            <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                <h5>@item.Title</h5>
+            </a>
+            
+            <p>@item.Introduction</p>
+        </div>
+        }
+    } else {
+        <h2 class="post-not-found">No post found</h2>
+    } 
+</div>
+
+<partial name="_ContactPartial"/>

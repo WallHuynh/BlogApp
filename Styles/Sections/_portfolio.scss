@@ -1,0 +1,180 @@
+@use '../Components/mixins' as *;
+@use '../custom' as *;
+@use '../Components/typography' as *;
+
+.portfolio-body {
+  @include gradient-dark;
+  color: $gray;
+}
+
+.list-n-intro {
+  padding: 3rem 3rem 0 0;
+  margin-bottom: 2rem;
+  p {
+    font-size: 1.2rem;
+    color: $gray;
+  }
+  &--name {
+    font-weight: 700;
+    color: $white;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding: 6rem 6rem 0 0;
+  }
+
+  &--intro {
+    color: $white;
+    @include media-breakpoint-up(md) {
+      font-size: 1.2rem;
+      padding-right: 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+
+  #list-example {
+    display: none;
+    width: fit-content;
+    margin-top: 1rem;
+    @include media-breakpoint-up(md) {
+      display: block;
+      margin-bottom: 4rem;
+    }
+
+    //link list and line
+    a {
+      transition: all 0.3s;
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.65rem;
+      font-weight: 400;
+      color: $gray;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+    }
+    a::before {
+      align-self: center;
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background-color: $gray;
+    }
+    a:hover,
+    .active {
+      color: $light;
+      font-weight: 700;
+      &::before {
+        width: 80px;
+        height: 2px;
+        background-color: $light;
+      }
+    }
+  }
+
+  .icons {
+    a {
+      font-size: 2em;
+      margin-right: 1rem;
+      color: $gray;
+      &:hover {
+        color: $white;
+      }
+      @include media-breakpoint-down(md) {
+        color: $light;
+      }
+    }
+  }
+}
+
+.details {
+  padding: 3rem 0 0 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  @include media-breakpoint-up(md) {
+    padding: 6.5rem 0 0 0;
+  }
+  .project-container {
+    margin-bottom: 2rem;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.062);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    @include media-breakpoint-up(sm) {
+      padding: 1rem;
+    }
+  }
+
+  #about,
+  #projects,
+  #blogs {
+    margin-bottom: 6rem;
+    .title {
+      display: block;
+      margin-block-start: 2rem;
+      margin-block-end: 1rem;
+      color: $white;
+    }
+    .project-title {
+      display: block;
+      font-size: 1.1rem;
+      font-family: $noto-san;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      color: $white;
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      .title {
+        display: none;
+      }
+    }
+  }
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-body {
+  @include gradient-dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .portfolio-navbar {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    list-style: none;
+    gap: 1rem;
+    .portfo-nav-item {
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      a {
+        text-decoration: none;
+        font-size: 2em;
+        color: $gray;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}

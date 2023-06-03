@@ -1,0 +1,47 @@
+@import '../wwwroot/lib/bootstrap/dist/scss/bootstrap';
+
+// MY THEME COLORS
+$color-1: #001550;
+$color-2: #390449e8;
+$color-3: #00dada;
+$color-4: #061f41e0;
+$color-5: rgb(98, 245, 176);
+$color-6: #44c1e7;
+
+$footer: #151414;
+$white: rgb(255, 255, 255);
+$light: rgb(243, 243, 243);
+$gray: rgba(236, 236, 236, 0.733);
+$black: black;
+$dark: rgb(55, 45, 56);
+$dark-light: rgb(100, 84, 102);
+
+$primary-light: $color-5;
+$secondary-light: $color-6;
+$primary: $color-1;
+$primary-dark: $color-2;
+$secondary: $color-3;
+$secondary-dark: $color-4;
+$input-border-color: $color-1;
+$primary-gradient: linear-gradient(
+  to right,
+  rgba($color-3, 0.95),
+  rgba($color-1, 0.95)
+);
+
+html,
+body {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  // @media (max-width: 768px) {
+  //   overflow-y: auto;
+  //   -webkit-overflow-scrolling: touch;
+  // }
+}
+
+.body-padding {
+  padding: calc(5rem - 5px) 3rem 3rem 3rem;
+  @media (max-width: 768px) {
+    padding: calc(5rem - 5px) 0 0 0;
+  }
+}

@@ -1,0 +1,54 @@
+@use '../custom' as *;
+@use '../Components/mixins' as *;
+@use '../Components/animations' as *;
+@use '../Components/typography' as *;
+
+.btn-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lastest-post-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  max-height: fit-content;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  // overflow-y: hidden;
+  // text-overflow: ellipsis;
+  .img-container {
+    max-width: calc(100% / 2);
+    .lastest-post-img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-inline: 1rem;
+    max-width: 100%;
+    @include media-breakpoint-up(md) {
+      max-width: calc(100% / 2);
+    }
+    p {
+      max-width: 100%;
+      height: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lastest-post-title {
+      text-decoration: none;
+      color: $dark;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}

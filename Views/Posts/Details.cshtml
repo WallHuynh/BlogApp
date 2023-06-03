@@ -1,0 +1,43 @@
+﻿@model BlogApp.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+    var date = @Model.LastUpdated == null ? @Model.PublishedDate :  @Model.LastUpdated;
+}
+<div class="post">
+    <div class="row">
+        <div class="col-md-4 col-12 order-md-1">
+            <a class="btn-back" asp-controller="Posts" asp-action="Index"><i class="fa-solid fa-arrow-left"></i>Back to All Posts</a>
+            <div class="post-info-md">
+                <a asp-controller="Categories" asp-action="Details" asp-route-id="@Model.CategoryID" class="button-64"><span class="text">@Model.Category.Name</span></a>
+                <h1>@Model.Title</h1>
+                <span>By @Model.BlogAppUser.FirstName @Model.BlogAppUser.LastName | @date</span>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-12 order-md-2 img-container">
+            <img src="~/imgs/@Model.ImgUrl" alt="">
+        </div>
+
+        <div class="col-md-4 col-12 order-md-3">
+            <div class="post-info-sm">
+                 <span class="button-64"><span class="text">@Model.Category.Name</span></span>
+                <h1>@Model.Title</h1>
+                <span>By @Model.BlogAppUser.FirstName @Model.BlogAppUser.LastName | @date</span>
+            </div>
+        </div> 
+
+        <div class="col-md-8 col-12 order-md-4">
+            <div class="content">
+                <p>@Model.Introduction</p>
+                @foreach (var paragraph in ViewBag.PostParagraphs)
+                {
+                    <p>@paragraph</p>
+                }
+                
+            </div>
+        </div> 
+    </div> 
+</div>
+
+<partial name="_ContactPartial"/>

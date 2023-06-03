@@ -1,0 +1,21 @@
+{
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "use sass with bootstrap",
+  "main": "index.js",
+  "scripts": {
+    "complie:sass": "sass --watch Styles:wwwroot/css"
+  },
+  "keywords": [
+    "Bootstrap",
+    "bootstrap",
+    "sass",
+    "BlogApp"
+  ],
+  "author": "TuongHuynh",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "sass": "^1.62.1"
+  }
+}

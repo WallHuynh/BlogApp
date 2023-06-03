@@ -1,0 +1,26 @@
+@{
+  string viewCategoryId =  (string)ViewContext.RouteData.Values["id"];
+}
+
+<div class="post-navbar" id="id-post-nav">
+  <ul class="post-nav-list">
+    <li id="posts" class="post-nav-item post-nav-item--active"><a asp-controller="Posts" asp-action="Index">All Posts</a></li>
+    @foreach ( var category in (IEnumerable<Category>)Model)
+    {
+      <li id="@category.CategoryID" class="post-nav-item"><a asp-controller="Categories" asp-action="Details" asp-route-id="@category.CategoryID">@category.Name</a></li>
+    }
+  </ul>
+</div>
+<script>
+  // Get all the navigation links
+  const navLinks = document.querySelectorAll('.post-nav-item');
+  const PostLink = document.querySelector('#default')
+  // Add event listeners to each navigation link
+  navLinks.forEach(link => {
+      if ("@viewCategoryId" == link.id) {
+        console.log('bing go')
+        navLinks.forEach(navLink => navLink.classList.remove('post-nav-item--active'));
+        link.classList.add('post-nav-item--active');
+      }
+  });
+</script>

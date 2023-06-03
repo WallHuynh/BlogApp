@@ -1,0 +1,52 @@
+﻿@model BlogApp.Models.PostHome;
+
+@{
+    ViewData["Title"] = "Home Page";
+    var date = Model.LastestPost.LastUpdated == null ? Model.LastestPost.PublishedDate :  Model.LastestPost.LastUpdated;    
+}
+
+  <h2 class="mt-3 mb-3 mx-3 mx-md-0">Lastest Post</h2>
+  <div class="lastest-post-container">
+      <div class="img-container d-none d-lg-block">
+          <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LastestPost.PostID">
+              <img class="lastest-post-img" src="~/imgs/@Model.LastestPost.ImgUrl"/>
+          </a>
+      </div>
+
+      <div class="content-container">
+            <a asp-controller="Categories" asp-action="Details" asp-route-id="@Model.LastestPost.CategoryID" class="button-64"><span class="text">@Model.LastestPost.Category.Name</span></a>
+            <a class="lastest-post-title" asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LastestPost.PostID">
+                <h3 class="mb-0">@Model.LastestPost.Title</h3>
+            </a>
+            <div class="mb-1 text-muted">@date</div>
+            <p>@Model.LastestPost.Introduction</p>
+            <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LastestPost.PostID" class="btn-back">Continue reading</a>
+      </div>
+  </div>
+
+
+  <h2 class="mt-3 mb-3 mx-3 mx-md-0">Featured Posts</h2>
+  <div class="post-container">
+    @foreach (var item in Model.FeaturedPosts)
+    {
+      <div class="post-item">
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                    <img src="~/imgs/@item.ImgUrl" width="100%" height="auto"/>
+                </a>
+
+                <a asp-controller="Categories" asp-action="Details" asp-route-id="@item.CategoryID" class="button-64"><span class="text">@item.Category.Name</span></a>
+                
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                    <h5>@item.Title</h5>
+                </a>
+                
+                <p>@item.Introduction</p>
+            </div>
+    }
+  </div>
+
+  <partial name="_ContactPartial"/>
+
+
+
+ 

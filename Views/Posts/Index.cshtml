@@ -1,0 +1,55 @@
+﻿@model BlogApp.Models.PostViewModel
+
+@{
+    ViewData["Title"] = "Posts";
+    var postCount = @Model.PostData.Count;
+
+}
+<partial name="_PostNavbar" for="@ViewData["CategoriesData"]"/>
+
+<div class="search-container">
+    <h1>Search Posts</h1>
+    <form class="p-md-2" asp-controller="Posts" asp-action="Index" method="get">
+        <select class="form-select" asp-for="SelectedCategoryID" asp-items="Model.Categories" id="inputGroup">
+            <option value="">All categories</option>
+        </select>
+        <div class="input-group mt-1">
+            <input class="form-control" placeholder="Search" type="text" asp-for="SearchString" />
+            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </form>
+</div>
+
+    <div class="post-container rounded overflow-hidden">
+
+        @if (@postCount > 0)
+        {
+            @foreach (var item in Model.PostData)
+            {
+            <div class="post-item">
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                    <img src="~/imgs/@item.ImgUrl"/>
+                </a>
+
+                <a asp-controller="Categories" asp-action="Details" asp-route-id="@item.CategoryID" class="button-64"><span class="text">@item.Category.Name</span></a>
+                
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+                    <h5>@item.Title</h5>
+                </a>
+                
+                <p>@item.Introduction</p>
+            </div>
+            }
+        } else {
+            <h2>No post found</h2>
+        }      
+        
+    </div>
+
+    <partial name="_ContactPartial"/>
+
+
+
+
+
+

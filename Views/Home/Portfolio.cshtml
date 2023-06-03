@@ -1,0 +1,146 @@
+@{
+    ViewData["Title"] = "Portfolio";
+    Layout = "_PortfolioLayout";
+}
+
+
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-body">
+                 <button type="button" class="btn btn-portfolio-navbar-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-sharp fa-solid fa-xmark"></i>
+                </button>
+                <ul class="portfolio-navbar">
+                    <li class="portfo-nav-item">
+                        <a
+                        asp-controller="Home"
+                        asp-action="Index"
+                        >HOME</a>
+                    </li>
+                    <li class="portfo-nav-item">
+                        <a
+                        asp-controller="Posts"
+                        asp-action="Index"
+                        >BLOGS</a>
+                    </li>
+                        <li class="portfo-nav-item">
+                        <a
+                        asp-controller="Home"
+                        asp-action="Portfolio"
+                        >PORTFOLIO</a>
+                    </li>
+                    <li class="portfo-nav-item">
+                        <a
+                        asp-controller="Home"
+                        asp-action="Contact"
+                        >CONTACT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-portfolio-navbar" data-bs-toggle="modal" data-bs-target="#Modal">
+    <i class="fa-sharp fa-solid fa-bars"></i>
+</button>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="sticky-md-top list-n-intro">
+            <h1 class="list-n-intro--name">Phuc Tuong Huynh</h1>
+            <p class="list-n-intro--intro">I build accessible, inclusive products and digital experiences for the web.</p>
+            <div id="list-example">
+                <a class="list-group-item list-group-item-action" href="#about">ABOUT</a>
+                <a class="list-group-item list-group-item-action" href="#projects">PROJECTS</a>
+                <a class="list-group-item list-group-item-action" href="#blogs">BLOGS</a>
+            </div>
+            <div class="icons">
+                <a href="https://www.facebook.com/tuong.huynhphuc.39?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://github.com/WallHuynh" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/tuong-huynh-phuc-60198a228" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/wallhuynh_17?igshid=MzNlNGNkZWQ4Mg==" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example details" tabindex="0">
+            <div id="about">
+                <h4 class="title">About</h4>
+                <p>At the end of 2022, I graduated from Can Tho Techonology Economic College. I decided to try my hand at creating a static website tumbled head first into the rabbit hole of coding and web development.</p>
+                <p>My main focus right now is finding opportunities to contribute and gather experiences.</p>
+                <p>When I’m not at the computer, I’m usually going to the Gym, playing video games with my friends.</p>
+            </div>
+            
+            <div id="projects">
+                <h4 class="title">Projects</h4>
+                <div class="row project-container rounded-2">
+                    <div class="col-sm-9 order-sm-2">
+                        <a asp-controller="Home" asp-action="Index">
+                            <span class="project-title">Wall'sBlog</span>
+                            <p>Where I write personal blogs sharing multiple categories as well as my portfolio with a friendly and simple UI</p>
+                            <div class="my-4">
+                                <span class="btn btn-tech rounded">.NET MVC</span>
+                                <span class="btn btn-tech rounded">Sass</span>
+                                <span class="btn btn-tech rounded">Bootstrap</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-sm-3 order-sm-1 mt-sm-1">
+                        <a asp-controller="Home" asp-action="Index">
+                            <img src="~/imgs/Screenshot 2023-05-30 185013.png" width="100%" height="auto"/>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row project-container rounded-2">
+                    <div class="col-sm-9 order-sm-2">
+                        <a href="https://wallhuynh-chatapp.netlify.app/login">
+                            <span class="project-title">Chat App</span>
+                            <p>Web app for personalized chatting. Add friends, add your own rooms,  join rooms by ID, add friends to room, leave room. Customize your own account informations like changing name, avatar, you can register or log in directly with Google or Facebook... and more</p>
+                            <div class="my-4">
+                                <span class="btn btn-tech rounded">React</span>
+                                <span class="btn btn-tech rounded">Sass</span>
+                                <span class="btn btn-tech rounded">Antd</span>
+                                <span class="btn btn-tech rounded">Firebase</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 order-sm-1 mt-sm-1">
+                        <a href="https://wallhuynh-chatapp.netlify.app/login">
+                            <img src="~/imgs/chat-app.png" width="100%" height="auto"/>
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+            <div id="blogs">
+                <h4 class="title">Blogs</h4>
+
+                @foreach (var post in ViewBag.BlogPosts)
+                {
+                    <div class="row project-container rounded-2">
+                        <div class="col-sm-3 mt-sm-1">
+                            <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.PostID">
+                                <img src="~/imgs/@post.ImgUrl" width="100%" height="auto"/>
+                            </a>
+                        </div>
+                        <div class="col-sm-9 mt-1 mt-md-0">
+                            <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.PostID">
+                                <span class="project-title">@post.Title</span>
+                                <p>@post.Introduction</p>
+                            </a>
+                        </div>
+                        
+                    </div>
+                }
+                </div>
+        </div>
+    </div>
+    
+</div>
+
+
+

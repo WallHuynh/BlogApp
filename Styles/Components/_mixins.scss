@@ -1,0 +1,43 @@
+@use '../custom' as *;
+
+// GRADIENT MIXIN
+@mixin gradient {
+  background: linear-gradient(
+    to right,
+    rgba($primary, 0.95),
+    rgba($secondary, 0.95)
+  );
+}
+@mixin gradient-dark {
+  background: linear-gradient(
+    to right,
+    rgba($primary-dark, 0.95),
+    rgba($secondary-dark, 0.95)
+  );
+}
+
+@mixin gradient-text {
+  background: linear-gradient(to right, $primary-light, $secondary-light);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ABSOLUTE CENTER
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// TRANSITION PROPERTY
+@mixin transitionProperty {
+  transition-duration: 1s;
+  transition-property: all;
+}
+//display center
+@mixin displayCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

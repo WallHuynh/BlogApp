@@ -1,0 +1,69 @@
+﻿@model BlogApp.Models.PostCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Post</h4>
+<hr />
+<form asp-action="Create" enctype="multipart/form-data">
+<div class="row">
+    
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BlogUserID" class="control-label"></label>
+                <select asp-for="BlogUserID" class ="form-control" asp-items="ViewBag.BlogUserID"></select>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <textarea asp-for="Title" class="form-control"></textarea>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Introduction" class="control-label"></label>
+                <textarea asp-for="Introduction" class="form-control" ></textarea>
+                <span asp-validation-for="Introduction" class="text-danger"></span>
+            </div>
+            
+        </div>
+        <div class="col-md-8">
+                <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control"> </textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+        </div>
+        <div class="col-md-4">
+             <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" accept="image/*">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" asp-for="IsPublished" /> @Html.DisplayNameFor(model => model.IsPublished)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryID" class="control-label"></label>
+                <select asp-for="CategoryID" class ="form-control" asp-items="ViewBag.CategoryID"></select>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+</div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

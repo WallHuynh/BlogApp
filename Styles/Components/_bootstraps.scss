@@ -1,0 +1,28 @@
+@use './mixins' as *;
+@use '../custom' as *;
+
+//custom select tag
+.form-select {
+  border-color: $primary;
+  option {
+    &:checked {
+      background-color: $primary;
+    }
+  }
+  &:hover {
+    border-color: $secondary;
+  }
+  &:focus {
+    border-color: $primary;
+  }
+}
+option:hover {
+  @include gradient;
+}
+
+.form-control {
+  border-color: $primary;
+  &:hover {
+    border-color: $secondary;
+  }
+}
