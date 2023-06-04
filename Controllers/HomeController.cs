@@ -38,7 +38,8 @@ namespace BlogApp.Controllers
 
             var featuredPosts = query
                 .Where(p => p.PostID != lastestPost.PostID)
-                .OrderByDescending(p => p.PublishedDate);
+                .OrderByDescending(p => p.PublishedDate)
+                .Take(6);
 
             if (!featuredPosts.Any() && lastestPost == null)
                 return NotFound();
@@ -49,6 +50,37 @@ namespace BlogApp.Controllers
                 LastestPost = lastestPost
             };
             return View(postData);
+        }
+
+        public async Task<IActionResult> GetMorePosts(int pageNumber, int pageSize)
+        {
+            int skip = (pageNumber - 1) * pageSize;
+            var query = from p in _context.Posts select p;
+            query = query
+                .Include(p => p.BlogAppUser)
+                .Include(p => p.Category)
+                .Where(p => p.IsPublished);
+
+            var lastestPost = await query
+                .OrderByDescending(p => p.PublishedDate)
+                .FirstOrDefaultAsync();
+
+            var featuredPosts = await query
+                .Where(p => p.PostID != lastestPost.PostID)
+                .OrderByDescending(p => p.PublishedDate)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToListAsync();
+            bool hasMorePosts = featuredPosts.Any() ? true : false;
+
+            if (hasMorePosts)
+            {
+                return PartialView("_PostsPartial", featuredPosts);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         public async Task<IActionResult> Portfolio()

@@ -10,10 +10,13 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<div class="table-manage">
+<div class="posts-manage">
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogAppUser)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -41,6 +44,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlogAppUser.UserName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>

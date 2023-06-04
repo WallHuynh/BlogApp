@@ -9,6 +9,15 @@
   }
 }
 
+@keyframes slide-up-animation {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -30%;
+  }
+}
+
 @keyframes pulse-border {
   0% {
     transform: scale(1);

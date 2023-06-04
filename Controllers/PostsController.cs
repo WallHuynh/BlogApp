@@ -19,6 +19,9 @@ namespace BlogApp.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        private string SearchString = "";
+        private string SelectedCategoryID = "";
+
         [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString, string selectedCategoryID)
         {
@@ -26,6 +29,9 @@ namespace BlogApp.Controllers
             {
                 return Problem("Entity set database is null.");
             }
+
+            SearchString = searchString;
+            SelectedCategoryID = selectedCategoryID;
 
             IQueryable<Category> categorieQuery = from c in _context.Categories select c;
 
@@ -40,7 +46,7 @@ namespace BlogApp.Controllers
             {
                 postQuery = postQuery.Where(c => c.CategoryID == selectedCategoryID);
             }
-            postQuery = postQuery.Where(p => p.IsPublished);
+            postQuery = postQuery.Where(p => p.IsPublished).Take(6);
 
             await GenerateCategoriesData();
 
@@ -54,6 +60,36 @@ namespace BlogApp.Controllers
                 )
             };
             return View(viewModel);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> GetMorePosts(int pageNumber, int pageSize)
+        {
+            int skip = (pageNumber - 1) * pageSize;
+            var postQuery = from p in _context.Posts select p;
+            postQuery = postQuery.Include(p => p.BlogAppUser).Include(p => p.Category);
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                postQuery = postQuery.Where(p => p.Title.Contains(SearchString));
+            }
+            if (!string.IsNullOrEmpty(SelectedCategoryID))
+            {
+                postQuery = postQuery.Where(c => c.CategoryID == SelectedCategoryID);
+            }
+
+            var posts = await postQuery.Skip(skip).Take(pageSize).ToListAsync();
+
+            bool hasMorePosts = posts.Any() ? true : false;
+
+            if (hasMorePosts)
+            {
+                return PartialView("_PostsPartial", posts);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         private async Task GenerateCategoriesData()

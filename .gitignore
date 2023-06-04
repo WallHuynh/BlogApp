@@ -283,7 +283,6 @@ FakesAssemblies/
 
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
-node_modules/
 
 # Visual Studio 6 build log
 *.plg
@@ -362,9 +361,14 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-*.e
-*env
+#node
+node_modules/
+
+#environment variables
+.env
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

@@ -9,11 +9,17 @@
   width: 100%;
   z-index: 100;
   animation: slideDown 0.5s ease-in-out;
+  -webkit-animation: slideDown 0.5s ease-in-out;
+}
+
+#nav-fixed-top.slide-up {
+  top: -50%;
+  animation: slide-up-animation 0.5s ease-in-out forwards;
+  -webkit-animation: slide-up-animation 0.5s ease-in-out forwards;
 }
 
 .narbar {
   position: relative;
-  transition: top 0.1s ease-in-out;
 }
 
 .nav-item:hover {
@@ -28,6 +34,10 @@
 
 .navbar-collapse {
   transition: height 0.3s ease-in-out;
+  -webkit-transition: height 0.3s ease-in-out;
+  -moz-transition: height 0.3s ease-in-out;
+  -ms-transition: height 0.3s ease-in-out;
+  -o-transition: height 0.3s ease-in-out;
 }
 
 .navbar-custom {
@@ -44,11 +54,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent line breaks */
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  overflow-x: auto;
+  /*Enablehorizontalscrolling*/
+  white-space: nowrap;
+  /*Preventlinebreaks*/
   border-bottom: 0.5px $dark-light solid;
   margin-bottom: 2rem;
+  transition: top 0.5s ease-out;
+  -webkit-transition: top 0.5s ease-out;
+  -moz-transition: top 0.5s ease-out;
+  -ms-transition: top 0.5s ease-out;
+  -o-transition: top 0.5s ease-out;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -105,15 +122,6 @@
 @include media-breakpoint-down(sm) {
   .post-navbar {
     justify-content: flex-start;
-    padding: 20px 1rem 15px 1rem;
-  }
-}
-
-@supports (-webkit-touch-callout: none) {
-  @include media-breakpoint-down(sm) {
-    .post-navbar {
-      justify-content: flex-start;
-      padding: 30px 1rem 13px 1rem;
-    }
+    padding: 2rem 1rem 1rem 1rem;
   }
 }

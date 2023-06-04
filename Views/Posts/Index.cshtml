@@ -24,7 +24,7 @@
 
         @if (@postCount > 0)
         {
-            @foreach (var item in Model.PostData)
+            @* @foreach (var item in Model.PostData)
             {
             <div class="post-item">
                 <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
@@ -39,15 +39,30 @@
                 
                 <p>@item.Introduction</p>
             </div>
-            }
+            } *@
+            <partial name="_PostsPartial" for="@Model.PostData"/>
+
         } else {
             <h2>No post found</h2>
         }      
         
     </div>
 
+    <partial name="_ButtonLoadMorePostPartial" for="@Model.PostData.Count"/>
+
     <partial name="_ContactPartial"/>
 
+@section scripts 
+{
+<script>
+   $(document).ready(function () {
+   $('.load-more-btn').on('click', () => {
+    isUserClickedButton = true
+    loadMorePosts("Posts")
+  })
+})
+</script>
+}
 
 
 

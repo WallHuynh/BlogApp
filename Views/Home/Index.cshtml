@@ -1,5 +1,6 @@
 ﻿@model BlogApp.Models.PostHome;
 
+
 @{
     ViewData["Title"] = "Home Page";
     var date = Model.LastestPost.LastUpdated == null ? Model.LastestPost.PublishedDate :  Model.LastestPost.LastUpdated;    
@@ -27,7 +28,7 @@
 
   <h2 class="mt-3 mb-3 mx-3 mx-md-0">Featured Posts</h2>
   <div class="post-container">
-    @foreach (var item in Model.FeaturedPosts)
+    @* @foreach (var item in Model.FeaturedPosts)
     {
       <div class="post-item">
                 <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
@@ -42,11 +43,25 @@
                 
                 <p>@item.Introduction</p>
             </div>
-    }
+    } *@
+    <partial name="_PostsPartial" for="@Model.FeaturedPosts"/>
+
   </div>
+
+  <partial name="_ButtonLoadMorePostPartial" for="@Model.FeaturedPosts.Count"/>
 
   <partial name="_ContactPartial"/>
 
-
+@section scripts 
+{
+<script>
+   $(document).ready(function () {
+   $('.load-more-btn').on('click', () => {
+    isUserClickedButton = true
+    loadMorePosts("Home")
+  })
+})
+</script>
+}
 
  

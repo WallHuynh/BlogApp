@@ -1,0 +1,17 @@
+@model List<Post>
+
+@foreach (var post in Model)
+        {
+            <div class="post-item">
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.PostID">
+                    <img src="~/imgs/@post.ImgUrl" width="100%" height="auto"/>
+                </a>
+
+                <a asp-controller="Categories" asp-action="Details" asp-route-id="@post.CategoryID" class="button-64"><span class="text">@post.Category?.Name</span></a>
+                
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.PostID">
+                    <h5>@post.Title</h5>
+                </a>
+                <p>@post.Introduction</p>
+            </div>
+        }
