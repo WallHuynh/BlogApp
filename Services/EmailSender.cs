@@ -7,17 +7,15 @@ namespace BlogApp.Services
     public class EmailSender : IEmailSender
     {
         private readonly ILogger _logger;
-        private readonly IConfiguration Configuration;
 
-        public EmailSender(ILogger<EmailSender> logger, IConfiguration configuration)
+        public EmailSender(ILogger<EmailSender> logger)
         {
-            Configuration = configuration;
             _logger = logger;
         }
 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
-            string sendGridKey = Environment.ExpandEnvironmentVariables("sendGridKey");
+            string sendGridKey = Environment.GetEnvironmentVariable("sendGridKey");
 
             if (string.IsNullOrEmpty(sendGridKey))
             {
@@ -28,8 +26,8 @@ namespace BlogApp.Services
 
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
         {
-            string senderEmail = Environment.ExpandEnvironmentVariables("senderEmail");
-            string senderName = Environment.ExpandEnvironmentVariables("senderName");
+            string senderEmail = Environment.GetEnvironmentVariable("senderEmail");
+            string senderName = Environment.GetEnvironmentVariable("senderName");
 
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()

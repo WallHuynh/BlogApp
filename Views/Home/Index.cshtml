@@ -10,7 +10,7 @@
   <div class="lastest-post-container">
       <div class="img-container d-none d-lg-block">
           <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LastestPost.PostID">
-              <img class="lastest-post-img" src="~/imgs/@Model.LastestPost.ImgUrl"/>
+              <img class="lastest-post-img" src="@Model.LastestPost.ImgUrl"/>
           </a>
       </div>
 

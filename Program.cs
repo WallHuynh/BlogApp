@@ -11,6 +11,7 @@ namespace BlogApp
     {
         public static async Task Main(string[] args)
         {
+            DotNetEnv.Env.Load();
             var builder = WebApplication.CreateBuilder(args);
             var connectionString =
                 builder.Configuration.GetConnectionString("defaultconnection")
@@ -45,6 +46,8 @@ namespace BlogApp
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<AzureStorge>();
 
             var app = builder.Build();
 

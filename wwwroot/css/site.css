@@ -10733,6 +10733,11 @@ body {
     padding: calc(5rem - 5px) 0 0 0;
   }
 }
+@media (max-width: 575.98px) {
+  .body-padding {
+    padding-bottom: 5rem;
+  }
+}
 
 #nav-fixed-top {
   padding-block: 1rem;
@@ -10815,6 +10820,7 @@ body {
   background-color: rgb(243, 243, 243);
   width: 100%;
   border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .post-nav-list {
@@ -11150,9 +11156,9 @@ body {
 
 .load-more-btn {
   padding: 0.5rem 1rem 0.5rem 1rem;
-  border: 0.1rem solid #001550;
+  border: 1px solid #00dada;
   background-color: rgba(236, 236, 236, 0.733);
-  color: #001550;
+  color: #00dada;
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -11673,7 +11679,7 @@ option:hover {
 }
 
 .intro-container {
-  margin-top: 2rem;
+  margin-top: 5rem;
   width: 100%;
   height: 300px;
 }
@@ -11681,6 +11687,7 @@ option:hover {
   .intro-container {
     padding-inline-start: 2rem;
     height: 250px;
+    margin-top: 8rem;
   }
 }
 

@@ -16,7 +16,7 @@
         {
         <div class="post-item">
             <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
-                <img src="~/imgs/@item.ImgUrl"/>
+                <img src="@item.ImgUrl"/>
             </a>
 
             <a asp-controller="Categories" asp-action="Details" asp-route-id="@item.CategoryID" class="button-64"><span class="text">@item.Category.Name</span></a>

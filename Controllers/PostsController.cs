@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using BlogApp.Services;
 
 namespace BlogApp.Controllers
 {
@@ -12,11 +13,17 @@ namespace BlogApp.Controllers
     {
         private readonly BlogAppContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly AzureStorge _storge;
 
-        public PostsController(BlogAppContext context, IWebHostEnvironment webHostEnvironment)
+        public PostsController(
+            BlogAppContext context,
+            IWebHostEnvironment webHostEnvironment,
+            AzureStorge storge
+        )
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _storge = storge;
         }
 
         private string SearchString = "";
@@ -164,15 +171,24 @@ namespace BlogApp.Controllers
 
                 if (post.Image != null && post.Image.Length != 0)
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imgs");
-                    Directory.CreateDirectory(uploadsFolder);
+                    // string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imgs");
+                    // Directory.CreateDirectory(uploadsFolder);
 
-                    string filePath = Path.Combine(uploadsFolder, post.Image.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    // string filePath = Path.Combine(uploadsFolder, post.Image.FileName);
+                    // using (var stream = new FileStream(filePath, FileMode.Create))
+                    // {
+                    //     await post.Image.CopyToAsync(stream);
+                    // }
+                    // data.ImgUrl = post.Image.FileName;
+
+                    string fileName = post.Image.FileName;
+                    using (var stream = new MemoryStream())
                     {
                         await post.Image.CopyToAsync(stream);
+                        string imageName = post.Image.FileName;
+                        string imageUrl = await _storge.UploadImageAsync(stream, imageName);
+                        data.ImgUrl = imageUrl;
                     }
-                    data.ImgUrl = post.Image.FileName;
                 }
                 _context.Add(data);
                 await _context.SaveChangesAsync();
@@ -258,18 +274,31 @@ namespace BlogApp.Controllers
 
             if (post.Image != null && post.Image.Length != 0)
             {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imgs");
-                Directory.CreateDirectory(uploadsFolder);
+                // string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imgs");
+                // Directory.CreateDirectory(uploadsFolder);
 
-                string filePath = Path.Combine(uploadsFolder, post.Image.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                // string filePath = Path.Combine(uploadsFolder, post.Image.FileName);
+                // using (var stream = new FileStream(filePath, FileMode.Create))
+                // {
+                //     await post.Image.CopyToAsync(stream);
+                // }
+
+                // string oldFile = Path.Combine(uploadsFolder, postToUpdate.ImgUrl);
+                // System.IO.File.Delete(oldFile);
+                // postToUpdate.ImgUrl = post.Image.FileName;
+
+                string fileName = post.Image.FileName;
+                using (var stream = new MemoryStream())
                 {
                     await post.Image.CopyToAsync(stream);
-                }
+                    string imageName = post.Image.FileName;
+                    string imageUrl = await _storge.UploadImageAsync(stream, imageName);
 
-                string oldFile = Path.Combine(uploadsFolder, postToUpdate.ImgUrl);
-                System.IO.File.Delete(oldFile);
-                postToUpdate.ImgUrl = post.Image.FileName;
+                    if (await _storge.DeletaImageAsync(postToUpdate.ImgUrl))
+                        Console.WriteLine("deleted old Image");
+
+                    postToUpdate.ImgUrl = imageUrl;
+                }
             }
 
             try

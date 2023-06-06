@@ -29,9 +29,9 @@ namespace BlogApp.Controllers
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
-            return _context.Contacts != null ?
-                        View(await _context.Contacts.ToListAsync()) :
-                        Problem("Entity set 'BlogAppContext.Contacts'  is null.");
+            return _context.Contacts != null
+                ? View(await _context.Contacts.ToListAsync())
+                : Problem("Entity set 'BlogAppContext.Contacts'  is null.");
         }
 
         // GET: Contacts/Details/5
@@ -42,8 +42,7 @@ namespace BlogApp.Controllers
                 return NotFound();
             }
 
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var contact = await _context.Contacts.FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();
@@ -60,8 +59,7 @@ namespace BlogApp.Controllers
                 return NotFound();
             }
 
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var contact = await _context.Contacts.FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();

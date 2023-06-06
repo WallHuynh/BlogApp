@@ -1,12 +1,13 @@
 @use '../custom' as *;
 
 .intro-container {
-  margin-top: 2rem;
+  margin-top: 5rem;
   width: 100%;
   height: 300px;
   @media screen and (max-width: 768px) {
     padding-inline-start: 2rem;
     height: 250px;
+    margin-top: 8rem;
   }
 }
 .intro {
