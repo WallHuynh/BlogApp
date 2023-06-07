@@ -11,7 +11,7 @@ namespace BlogApp
     {
         public static async Task Main(string[] args)
         {
-            DotNetEnv.Env.Load();
+            /*DotNetEnv.Env.Load();*/
             var builder = WebApplication.CreateBuilder(args);
             var connectionString =
                 builder.Configuration.GetConnectionString("defaultconnection")
