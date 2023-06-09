@@ -51,10 +51,12 @@
 
 //category nav for posts
 .post-navbar {
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  flex-wrap: nowrap;
+  // padding: 1.5rem 1rem 1.5rem 1rem;
   overflow-x: auto;
   /*Enablehorizontalscrolling*/
   white-space: nowrap;
@@ -93,7 +95,9 @@
 }
 
 .post-nav-list {
+  min-height: 100%;
   display: flex;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   padding: 0;
@@ -104,6 +108,9 @@
 }
 
 .post-nav-item {
+  height: fit-content;
+  display: flex;
+  align-items: center;
   &--active {
     border-bottom: $primary 0.2rem solid;
   }
@@ -120,7 +127,7 @@
     }
   }
 }
-@include media-breakpoint-down(sm) {
+@media screen and (max-width: 400px) {
   .post-navbar {
     justify-content: flex-start;
     padding: 2rem 1rem 1rem 1rem;

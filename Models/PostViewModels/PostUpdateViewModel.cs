@@ -16,7 +16,7 @@ namespace BlogApp.Models
         public bool IsPublished { get; set; }
         public string CategoryID { get; set; }
 
-        // public string ImgUrl { get; set; }
+        public string? ImgUrl { get; set; }
 
         [DisplayName("Upload Image")]
         [DataType(DataType.Upload)]

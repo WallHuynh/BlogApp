@@ -1,4 +1,5 @@
-﻿using BlogApp.Data;
+﻿using System;
+using BlogApp.Data;
 using BlogApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,7 +48,9 @@ namespace BlogApp.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                postQuery = postQuery.Where(p => p.Title.Contains(searchString));
+                postQuery = postQuery.Where(
+                    p => p.Title.ToLower().Contains(searchString.ToLower())
+                );
             }
             if (!string.IsNullOrEmpty(selectedCategoryID))
             {
@@ -78,7 +81,9 @@ namespace BlogApp.Controllers
 
             if (!string.IsNullOrEmpty(SearchString))
             {
-                postQuery = postQuery.Where(p => p.Title.Contains(SearchString));
+                postQuery = postQuery.Where(
+                    p => p.Title.ToLower().Contains(SearchString.ToLower())
+                );
             }
             if (!string.IsNullOrEmpty(SelectedCategoryID))
             {
@@ -164,9 +169,10 @@ namespace BlogApp.Controllers
                     Content = post.Content,
                     CategoryID = post.CategoryID,
                     BlogUserID = post.BlogUserID,
-                    PublishedDate = DateTime.Now,
+                    PublishedDate = GetVietameseTimeZone(),
                     IsPublished = post.IsPublished,
-                    Introduction = post.Introduction
+                    Introduction = post.Introduction,
+                    ImgUrl = post.ImgUrl
                 };
 
                 if (post.Image != null && post.Image.Length != 0)
@@ -242,7 +248,8 @@ namespace BlogApp.Controllers
                 Content = postData.Content,
                 IsPublished = postData.IsPublished,
                 CategoryID = postData.CategoryID,
-                Introduction = postData.Introduction
+                Introduction = postData.Introduction,
+                ImgUrl = postData.ImgUrl
             };
             ViewBag.Img = postData.ImgUrl;
             PopulateCategoriesDropDownList(postData.CategoryID);
@@ -269,8 +276,10 @@ namespace BlogApp.Controllers
             postToUpdate.Title = post.Title;
             postToUpdate.Content = post.Content;
             postToUpdate.IsPublished = post.IsPublished;
+            postToUpdate.LastUpdated = GetVietameseTimeZone();
             postToUpdate.CategoryID = post.CategoryID;
             postToUpdate.Introduction = post.Introduction;
+            postToUpdate.ImgUrl = post.ImgUrl;
 
             if (post.Image != null && post.Image.Length != 0)
             {
@@ -319,6 +328,19 @@ namespace BlogApp.Controllers
             return View(postToUpdate);
         }
 
+        private DateTime GetVietameseTimeZone()
+        {
+            DateTime currentUtcTime = DateTime.UtcNow;
+            TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById(
+                "SE Asia Standard Time"
+            );
+            DateTime currentVietnamTime = TimeZoneInfo.ConvertTimeFromUtc(
+                currentUtcTime,
+                vietnamTimeZone
+            );
+            return currentVietnamTime;
+        }
+
         // GET: Posts/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
@@ -356,6 +378,13 @@ namespace BlogApp.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Manage));
+        }
+
+        public IActionResult DownloadDB()
+        {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "BlogApp.db");
+            string contentType = "application/octet-stream";
+            return PhysicalFile(filePath, contentType, Path.GetFileName(filePath));
         }
 
         private bool PostExists(string id)

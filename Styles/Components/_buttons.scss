@@ -145,15 +145,19 @@
 }
 
 .load-more-btn {
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  border: 1px solid $secondary;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 1px 2px 0px,
+    rgba(0, 0, 0, 0.8) 0px 1px 3px 1px;
+
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  border: none;
   background-color: $gray;
-  color: $secondary;
+  color: $primary;
   font-size: 1.2rem;
   font-weight: 600;
   &:hover {
     color: $white;
     @include gradient;
-    border: 0.1rem solid $white;
+    box-shadow: rgba(50, 50, 93, 0.4) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.6) 0px 8px 16px -8px;
   }
 }

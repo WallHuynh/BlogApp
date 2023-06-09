@@ -10731,6 +10731,8 @@ body {
 @media (max-width: 768px) {
   .body-padding {
     padding: calc(5rem - 5px) 0 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 @media (max-width: 575.98px) {
@@ -10786,10 +10788,11 @@ body {
 }
 
 .post-navbar {
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  flex-wrap: nowrap;
   overflow-x: auto;
   /*Enablehorizontalscrolling*/
   white-space: nowrap;
@@ -10824,7 +10827,9 @@ body {
 }
 
 .post-nav-list {
+  min-height: 100%;
   display: flex;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   padding: 0;
@@ -10836,6 +10841,11 @@ body {
   }
 }
 
+.post-nav-item {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+}
 .post-nav-item--active {
   border-bottom: #001550 0.2rem solid;
 }
@@ -10852,7 +10862,7 @@ body {
   color: black;
 }
 
-@media (max-width: 575.98px) {
+@media screen and (max-width: 400px) {
   .post-navbar {
     justify-content: flex-start;
     padding: 2rem 1rem 1rem 1rem;
@@ -11155,17 +11165,18 @@ body {
 }
 
 .load-more-btn {
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  border: 1px solid #00dada;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 1px 2px 0px, rgba(0, 0, 0, 0.8) 0px 1px 3px 1px;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  border: none;
   background-color: rgba(236, 236, 236, 0.733);
-  color: #00dada;
+  color: #001550;
   font-size: 1.2rem;
   font-weight: 600;
 }
 .load-more-btn:hover {
   color: rgb(255, 255, 255);
   background: linear-gradient(to right, rgba(0, 21, 80, 0.95), rgba(0, 218, 218, 0.95));
-  border: 0.1rem solid rgb(255, 255, 255);
+  box-shadow: rgba(50, 50, 93, 0.4) 0px 13px 27px -5px, rgba(0, 0, 0, 0.6) 0px 8px 16px -8px;
 }
 
 h1,

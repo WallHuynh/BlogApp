@@ -33,16 +33,14 @@ html,
 body {
   scroll-behavior: smooth;
   box-sizing: border-box;
-  // @media (max-width: 768px) {
-  //   overflow-y: auto;
-  //   -webkit-overflow-scrolling: touch;
-  // }
 }
 
 .body-padding {
   padding: calc(5rem - 5px) 3rem 3rem 3rem;
   @media (max-width: 768px) {
     padding: calc(5rem - 5px) 0 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   @include media-breakpoint-down(sm) {
     padding-bottom: 5rem;

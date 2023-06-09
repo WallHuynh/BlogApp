@@ -12,14 +12,14 @@ namespace BlogApp.Models
         public string Introduction { get; set; }
 
         [StringLength(int.MaxValue)]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         public bool IsPublished { get; set; }
         public string? CategoryID { get; set; }
         public string? BlogUserID { get; set; }
+        public string? ImgUrl { get; set; }
 
         [DisplayName("Upload Image")]
-        [Required(ErrorMessage = "Pick an Image")]
         [DataType(DataType.Upload)]
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }
