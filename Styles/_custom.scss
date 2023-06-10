@@ -38,6 +38,7 @@ body {
 .body-padding {
   padding: calc(5rem - 5px) 3rem 3rem 3rem;
   @media (max-width: 768px) {
+    width: 100%;
     padding: calc(5rem - 5px) 0 0 0;
     overflow-y: auto;
     overflow-x: hidden;

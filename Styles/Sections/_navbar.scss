@@ -6,8 +6,10 @@
   min-height: 4rem;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 100;
+  overflow-x: hidden;
+  z-index: 999;
   animation: slideDown 0.5s ease-in-out;
   -webkit-animation: slideDown 0.5s ease-in-out;
 }
@@ -19,7 +21,8 @@
 }
 
 .narbar {
-  position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .nav-item:hover {
@@ -52,6 +55,7 @@
 //category nav for posts
 .post-navbar {
   height: 70px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,6 +134,6 @@
 @media screen and (max-width: 400px) {
   .post-navbar {
     justify-content: flex-start;
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
   }
 }

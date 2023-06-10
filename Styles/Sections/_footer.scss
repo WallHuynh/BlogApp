@@ -33,9 +33,9 @@
     &--title {
       color: $dark;
       text-decoration: none;
-      font-size: 1.2em;
-      @media (min-width: 600px) {
-        font-size: 1rem;
+      font-size: 1em;
+      @include media-breakpoint-down(sm) {
+        font-size: 0.9rem;
       }
     }
 
@@ -43,10 +43,6 @@
       font-size: 0.8rem;
       color: $dark;
       text-decoration: none;
-
-      @include media-breakpoint-up(sm) {
-        font-size: 1rem;
-      }
     }
     &:hover {
       @include gradient-text;

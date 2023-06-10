@@ -10730,6 +10730,7 @@ body {
 }
 @media (max-width: 768px) {
   .body-padding {
+    width: 100%;
     padding: calc(5rem - 5px) 0 0 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -10746,8 +10747,10 @@ body {
   min-height: 4rem;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 100;
+  overflow-x: hidden;
+  z-index: 999;
   animation: slideDown 0.5s ease-in-out;
   -webkit-animation: slideDown 0.5s ease-in-out;
 }
@@ -10759,7 +10762,8 @@ body {
 }
 
 .narbar {
-  position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .nav-item:hover a {
@@ -10865,7 +10869,7 @@ body {
 @media screen and (max-width: 400px) {
   .post-navbar {
     justify-content: flex-start;
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
   }
 }
 .footer {
@@ -10904,22 +10908,17 @@ body {
 .contact-box__info--title {
   color: rgb(55, 45, 56);
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1em;
 }
-@media (min-width: 600px) {
+@media (max-width: 575.98px) {
   .contact-box__info--title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 .contact-box__info--subtitle {
   font-size: 0.8rem;
   color: rgb(55, 45, 56);
   text-decoration: none;
-}
-@media (min-width: 576px) {
-  .contact-box__info--subtitle {
-    font-size: 1rem;
-  }
 }
 .contact-box__info:hover {
   background: linear-gradient(to right, rgb(98, 245, 176), #44c1e7);
