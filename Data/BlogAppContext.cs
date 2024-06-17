@@ -21,28 +21,28 @@ public class BlogAppContext : IdentityDbContext<BlogAppUser>
     {
         base.OnModelCreating(builder);
 
-        builder
-            .Entity<Post>()
-            .HasOne(p => p.BlogAppUser)
-            .WithMany(u => u.Posts)
-            .HasForeignKey(p => p.BlogUserID);
-        builder
-            .Entity<Post>()
-            .HasOne(p => p.Category)
-            .WithMany(u => u.Posts)
-            .HasForeignKey(p => p.CategoryID);
-        builder
-            .Entity<Comment>()
-            .HasOne(p => p.Post)
-            .WithMany(u => u.Comments)
-            .HasForeignKey(p => p.PostID);
+            builder
+                .Entity<Post>()
+                .HasOne(p => p.BlogAppUser)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(p => p.BlogUserID);
+            builder
+                .Entity<Post>()
+                .HasOne(p => p.Category)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(p => p.CategoryID);
+            builder
+                .Entity<Comment>()
+                .HasOne(p => p.Post)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(p => p.PostID);
 
-        builder.Ignore<List<string>>();
-        // Other configurations...
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
-        builder.ApplyConfiguration(new ApplicationUserIdentityConfiguration());
+            builder.Ignore<List<string>>();
+            // Other configurations...
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new ApplicationUserIdentityConfiguration());
     }
 }
 
